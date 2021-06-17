@@ -4,12 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch:sass": "node-sass assets/sass/main.scss assets/css/style.css -w",
+    "compile:sass": "node-sass assets/sass/main.scss assets/css/style.comp.css",
+    "concat:css": "concat -o assets/css/style.concat.css assets/css/icon-fonts.css assets/css/style.comp.css",
+    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' assets/css/style.concat.css -o assets/css/style.prefix.css",
+    "compress:css": "node-sass assets/css/style.prefix.css assets/css/style.min.css  --output-style compressed",
+    "build:css": "npm-run-all compile:sass concat:css prefix:css compress:css"
   },
   "author": "Karan Singh Singare",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^10.2.6",
     "bootstrap": "^5.0.1",
-    "jquery": "^3.6.0"
+    "concat": "^1.0.3",
+    "jquery": "^3.6.0",
+    "node-sass": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^8.3.1"
   }
 }

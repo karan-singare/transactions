@@ -1,0 +1,49 @@
+@import "base";
+
+.transaction {
+  padding: 1rem;
+}
+.transaction_amount_type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .transaction_amount {
+    font-size: 3rem;
+  }
+  .transaction_type {
+    display: flex;
+    align-items: center;
+  }
+  .icon-check, .icon-timer {
+    height: 1rem;
+    width: 1rem;
+  }
+  .icon-check {
+    fill: green;
+  }
+  .icon-timer {
+    fill: grey;
+  }
+}
+
+.transaction_id_details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .transaction_id {
+
+  }
+  .transaction_details_btn {
+    .view_details_btn {
+      border: none;
+      background-color: transparent;
+
+      svg {
+        height: 2rem;
+        width: 2rem;
+        fill: gray;
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,120 @@
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <div class="container">
     <div class="transaction_date">7 Oct 2020</div>
     <div class="transaction_list">
+
       <div class="col-md-6">
         <div class="transaction card">
-          <div class="transaction_amount">₹ 3000</div>
-          <div class="transaction_type">You Paid</div>
-          <div class="transaction_id">
-            <span>Transaction ID</span>
-            <p>A1234567345679987</p>
+          <div class="transaction_amount_type">
+            <div class="transaction_amount">₹ 3000</div>
+            <div class="transaction_type"><span>
+                <svg class="icon-check">
+                  <use xlink:href="assets/images/sprite.svg#icon-check"></use>
+                </svg>
+              </span> You paid</div>
+          </div>
+          <div class="transaction_id_details">
+            <div class="transaction_id">
+              <span>Transaction ID</span>
+              <p>A1234567345679987</p>
+
+            </div>
+            <div class="transaction_details_btn">
+              <button type="button" name="button" class="view_details_btn">
+                <svg>
+                  <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
+        <div class="transaction_time">7 Oct 2020 10:24 AM</div>
       </div>
+
+      <div class="col-md-6">
+        <div class="transaction card">
+          <div class="transaction_amount_type">
+            <div class="transaction_amount">₹ 250</div>
+            <div class="transaction_type"><span>
+                <svg class="icon-timer">
+                  <use xlink:href="assets/images/sprite.svg#icon-timer"></use>
+                </svg>
+              </span> You requested</div>
+          </div>
+          <div class="transaction_id_details">
+            <button type="button" name="button" class="transaction_cancel_btn">Cancel</button>
+            <div class="transaction_details_btn">
+              <button type="button" name="button" class="view_details_btn">
+                <svg>
+                  <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="transaction_time">7 Oct 2020 10:24 AM</div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="transaction card">
+          <div class="transaction_amount_type">
+            <div class="transaction_amount">₹ 250</div>
+            <div class="transaction_type"><span>
+                <svg class="icon-check">
+                  <use xlink:href="assets/images/sprite.svg#icon-check"></use>
+                </svg>
+              </span> You recieved</div>
+          </div>
+          <div class="transaction_id_details">
+            <div class="transaction_id">
+              <span>Transaction ID</span>
+              <p>A1234567345679987</p>
+
+            </div>
+            <div class="transaction_details_btn">
+              <button type="button" name="button" class="view_details_btn">
+                <svg>
+                  <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="transaction_time">7 Oct 2020 10:24 AM</div>
+      </div>
+
+
+      <div class="col-md-6">
+        <div class="transaction card">
+          <div class="transaction_amount_type">
+            <div class="transaction_amount">₹ 250</div>
+            <div class="transaction_type"><span>
+                <svg class="icon-timer">
+                  <use xlink:href="assets/images/sprite.svg#icon-timer"></use>
+                </svg>
+              </span> Request recieved</div>
+          </div>
+          <div class="transaction_id_details">
+            <div class="transaction_approval_btns">
+              <button type="button" name="button" class="transaction_pay_btn">Pay</button>
+              <button type="button" name="button" class="transaction_decline_btn">Decline</button>
+            </div>
+            <div class="transaction_details_btn">
+              <button type="button" name="button" class="view_details_btn">
+                <svg>
+                  <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="transaction_time">7 Oct 2020 10:24 AM</div>
+      </div>
+
     </div>
 
   </div>
@@ -32,4 +133,5 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
   <script src="assets/js/main.js" charset="utf-8"></script>
 </body>
+
 </html>
