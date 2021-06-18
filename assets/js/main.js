@@ -1,4 +1,4 @@
-const renderPaidCard = (transaction) => {
+const renderPaidCard = (transaction, index, date) => {
   return `
     <div class="row" style="flex-direction: row-reverse;">
       <div class="col-md-6">
@@ -18,7 +18,7 @@ const renderPaidCard = (transaction) => {
 
             </div>
             <div class="transaction_details_btn">
-              <button type="button" name="button" class="view_details_btn">
+              <button type="button" name="button" class="view_details_btn" data-index="${index}" data-date="${date}">
                 <svg>
                   <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
                 </svg>
@@ -32,7 +32,7 @@ const renderPaidCard = (transaction) => {
   `;
 };
 
-const renderPaymentRequestSentCard = (transaction) => {
+const renderPaymentRequestSentCard = (transaction, index, date) => {
   return `
     <div class="row" style="flex-direction: row-reverse;">
       <div class="col-md-6">
@@ -48,7 +48,7 @@ const renderPaymentRequestSentCard = (transaction) => {
           <div class="transaction_id_details">
             <button type="button" name="button" class="transaction_cancel_btn">Cancel</button>
             <div class="transaction_details_btn">
-              <button type="button" name="button" class="view_details_btn">
+              <button type="button" name="button" class="view_details_btn" data-index="${index}" data-date="${date}">
                 <svg>
                   <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
                 </svg>
@@ -62,7 +62,7 @@ const renderPaymentRequestSentCard = (transaction) => {
   `;
 };
 
-const renderPaymentRecievedCard = (transaction) => {
+const renderPaymentRecievedCard = (transaction, index, date) => {
   return `
     <div class="row">
       <div class="col-md-6">
@@ -82,7 +82,7 @@ const renderPaymentRecievedCard = (transaction) => {
 
             </div>
             <div class="transaction_details_btn">
-              <button type="button" name="button" class="view_details_btn">
+              <button type="button" name="button" class="view_details_btn" data-index="${index}" data-date="${date}">
                 <svg>
                   <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
                 </svg>
@@ -95,7 +95,7 @@ const renderPaymentRecievedCard = (transaction) => {
     </div>
   `;
 };
-const renderPaymentRequestRecievedCard = (transaction) => {
+const renderPaymentRequestRecievedCard = (transaction, index, date) => {
   return `
     <div class="row">
       <div class="col-md-6">
@@ -114,7 +114,7 @@ const renderPaymentRequestRecievedCard = (transaction) => {
               <button type="button" name="button" class="transaction_decline_btn">Decline</button>
             </div>
             <div class="transaction_details_btn">
-              <button type="button" name="button" class="view_details_btn">
+              <button type="button" name="button" class="view_details_btn"  data-index="${index}" data-date="${date}">
                 <svg>
                   <use xlink:href="assets/images/sprite.svg#icon-chevron-thin-right"></use>
                 </svg>
@@ -143,12 +143,12 @@ let date_transactions;
 /**
  * Cards for sent payments and requests
  */
-const renderSentCard = (transaction) => {
+const renderSentCard = (transaction, index, date) => {
   let transaction_list = '';
   if (transaction.type == 1 && transaction.status == 2) {
-    transaction_list += renderPaidCard(transaction);
+    transaction_list += renderPaidCard(transaction, index, date);
   } else if (transaction.type == 2 && transaction.status == 1) {
-    transaction_list += renderPaymentRequestSentCard(transaction);
+    transaction_list += renderPaymentRequestSentCard(transaction, index, date);
   }
   return transaction_list;
 };
@@ -156,13 +156,13 @@ const renderSentCard = (transaction) => {
 /**
  * Cards for received payments and requests
  */
-const renderRecievedCard = (transaction) => {
+const renderRecievedCard = (transaction, index, date) => {
   let transaction_list = '';
   if (transaction.type == 2 && transaction.status == 2) {
-    transaction_list += renderPaymentRecievedCard(transaction);
+    transaction_list += renderPaymentRecievedCard(transaction, index, date);
   }
   else if (transaction.type == 1 && transaction.status == 2) {
-    transaction_list += renderPaymentRequestRecievedCard(transaction);
+    transaction_list += renderPaymentRequestRecievedCard(transaction, index, date);
   }
   return transaction_list;
 };
@@ -209,11 +209,12 @@ const renderTransactions = (date_transactions) => {
       const temp_date = new Date(parseInt(date)).toLocaleDateString("en-US");
       const date_html = `<div class="transaction_date">${temp_date}</div>`;
 
-      transactions.forEach(transaction => {
+      transactions.forEach((transaction, index) => {
+
         if (transaction.direction == 1) {
-          transaction_list +=  renderSentCard(transaction);
+          transaction_list +=  renderSentCard(transaction, index, date);
         } else if (transaction.direction == 2) {
-          transaction_list +=  renderRecievedCard(transaction);
+          transaction_list +=  renderRecievedCard(transaction, index, date);
         }
       });
 
@@ -229,12 +230,19 @@ const renderTransactions = (date_transactions) => {
   }
 };
 
+
 fetch('https://dev.onebanc.ai/assignment.asmx/GetTransactionHistory?userId=1&recipientId=2')
-  .then(response => response.json())
-  .then(data => {
-    transactions = data.transactions;
-    dates = getAllTransactionDates(transactions);
-    date_transactions = arrangeTransactionsByDates(transactions, dates);
-    renderTransactions(date_transactions);
-    // document.querySelector('.transaction_list').innerHTML = transaction_list;
-  });
+    .then(response => response.json())
+    .then(data => {
+      transactions = data.transactions;
+      dates = getAllTransactionDates(transactions);
+      date_transactions = arrangeTransactionsByDates(transactions, dates);
+      renderTransactions(date_transactions);
+
+      Array.from(document.getElementsByClassName('view_details_btn')).forEach((btn) => {
+        const transaction = date_transactions[btn.dataset.date][btn.dataset.index];
+        btn.addEventListener('click', () => {
+          console.log(transaction);
+        });
+      });
+    });
