@@ -1,5 +1,39 @@
 @import "base";
 
+.container {
+  margin-bottom: 2rem;
+}
+
+.transactions {
+  text-align: center;
+  border: 1px solid black;
+  border-top: none;
+  padding: 1rem;
+  margin: 0 1rem;
+}
+.transaction_date {
+  margin-bottom: 1rem;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 1px;
+    width: 40%;
+    border-top: 1px dashed black;
+    top: 50%;
+    left: 0;
+  }
+  &::before {
+    position: absolute;
+    content: '';
+    height: 1px;
+    width: 40%;
+    border-top: 1px dashed black;
+    top: 50%;
+    right: 0;
+  }
+}
 .transaction {
   padding: 1rem;
 }
@@ -9,7 +43,7 @@
   justify-content: space-between;
 
   .transaction_amount {
-    font-size: 3rem;
+    font-size: 2rem;
   }
   .transaction_type {
     display: flex;
@@ -32,7 +66,7 @@
   justify-content: space-between;
   align-items: center;
   .transaction_id {
-
+    text-align: left;
   }
   .transaction_details_btn {
     .view_details_btn {
@@ -46,4 +80,40 @@
       }
     }
   }
+}
+.transaction_time {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.profile_info {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+  margin-bottom: 0;
+  display: flex;
+  grid-gap: 1rem;
+  align-items: center;
+
+  .back_btn {
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  .profile_pic {
+    height: 3rem;
+    width: 3rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .name_contact {
+    p {
+      margin: 0;
+    }
+  }
+
 }
